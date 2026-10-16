@@ -70,6 +70,11 @@ function CreatureField() {
             : c )); // otherwise return it unchanged 
             };
 
+    // Count awake creatures for summary
+    const awakeCount = creatures.filter(c => c.isAwake).length;
+    const allAwake = awakeCount === creatures.length;
+    const allAsleep = awakeCount === 0;
+
     const fieldStyle = {
         position: 'relative',
         width: '800px',
@@ -80,21 +85,26 @@ function CreatureField() {
     };
 
     return (
-        <div style={fieldStyle}>
-            {creatures.map(creature => (
-                <Creature
-                    key={creature.id}
-                    id={creature.id}
-                    name={creature.name}
-                    age={creature.age}
-                    sleepImageUrl={creature.sleepImageUrl}
-                    awakeImageUrl={creature.awakeImageUrl}
-                    x={creature.x} y={creature.y}
-                    isAwake={creature.isAwake}
-                    onWake={handleWake}
-                    onSleep={handleSleep}
-                />
-            ))} 
+        <div>
+            <div style={{ textAlign: 'center', marginBottom: '10px' }}>
+                <p>{awakeCount} of {creatures.length} creatures awake.</p>
+            </div>
+            <div style={fieldStyle}>
+                {creatures.map(creature => (
+                    <Creature
+                        key={creature.id}
+                        id={creature.id}
+                        name={creature.name}
+                        age={creature.age}
+                        sleepImageUrl={creature.sleepImageUrl}
+                        awakeImageUrl={creature.awakeImageUrl}
+                        x={creature.x} y={creature.y}
+                        isAwake={creature.isAwake}
+                        onWake={handleWake}
+                        onSleep={handleSleep}
+                    />
+                ))} 
+            </div>
         </div>
     );
 }
