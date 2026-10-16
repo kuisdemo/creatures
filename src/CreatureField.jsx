@@ -80,6 +80,24 @@ function CreatureField() {
     if (allAwake) backgroundColor = '#ffd700'; // when all awake
     else if (allAsleep) backgroundColor = '#1a1a2e'; // when all asleep
 
+    // toggle all creatures for toggle button
+    const toggleAll = () => {
+        if (allAwake) {
+            // put all to sleep
+            setCreatures(creatures.map(c => ({ ...c, isAwake: false })));
+        } else { // wake all up and move to random positions
+            setCreatures(creatures.map(c => {
+                if (c.isAwake) return c; // if already awake, return unchanged
+                return { // otherwise, wake up and move to a new random position
+                    ...c,
+                    isAwake: true,
+                    x: Math.floor(Math.random() * 700),
+                    y: Math.floor(Math.random() * 700)
+            };
+            }));
+        }
+    };
+
     const fieldStyle = {
         position: 'relative',
         width: '800px',
@@ -93,6 +111,9 @@ function CreatureField() {
         <div>
             <div style={{ textAlign: 'center', marginBottom: '10px' }}>
                 <p>{awakeCount} of {creatures.length} creatures awake.</p>
+                <button onClick={toggleAll}>
+                    {allAwake ? 'Put all to Sleep' : 'Wake all'}
+                </button>
             </div>
             <div style={fieldStyle}>
                 {creatures.map(creature => (
