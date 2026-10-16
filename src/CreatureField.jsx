@@ -41,6 +41,7 @@ function CreatureField() {
 
     // Handle individual creature wake/sleep
     // Option 1: One function to handle both waking and sleeping
+    /*
     const handleWake = (id) => {
         setCreatures(creatures.map(c => {
             if (c.id !== id) return c; // If not the clicked creature, return it unchanged
@@ -51,7 +52,23 @@ function CreatureField() {
                 x: Math.floor(Math.random() * 700), 
                 y: Math.floor(Math.random() * 700) };
         }));
+    };*/
+    // Option 2: Separate functions for waking and sleeping
+    const handleSleep = (id) => {
+        setCreatures(creatures.map(c =>
+            // if the creature is the clicked one, set isAwake to false, otherwise return it unchanged  
+            c.id === id ? {...c, isAwake: false } : c
+            ));
     };
+    const handleWake = (id) => {
+        setCreatures(creatures.map(c => 
+            c.id === id // if the creature is the clicked one
+            ? {...c, isAwake: true, // set isAwake to true and move to a new random position
+                x: Math.floor(Math.random() * 700), 
+                y: Math.floor(Math.random() * 700)  
+                }
+            : c )); // otherwise return it unchanged 
+            };
 
     const fieldStyle = {
         position: 'relative',
@@ -75,6 +92,7 @@ function CreatureField() {
                     x={creature.x} y={creature.y}
                     isAwake={creature.isAwake}
                     onWake={handleWake}
+                    onSleep={handleSleep}
                 />
             ))} 
         </div>

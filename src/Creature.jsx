@@ -10,7 +10,12 @@ function Creature(props) {
     };
 
     const handleClick = () => {
-        props.onWake(props.id);
+        // for Option 1 in creatureField
+        //props.onWake(props.id); 
+        // for Option 2 in creatureField
+        props.isAwake
+            ? props.onSleep(props.id) // if awake, put it to sleep
+            : props.onWake(props.id); // if asleep, wake it up
     };
 
     return (
