@@ -1,6 +1,5 @@
 import Creature from './Creature.jsx';
 
-function CreatureField() {
     const creatureData =[
         {
             id: 1, name: "Mr. Fresh", age: 3,
@@ -34,6 +33,8 @@ function CreatureField() {
         }
     ]
 
+function CreatureField() {
+    
     const fieldStyle = {
         position: 'relative',
         width: '800px',
