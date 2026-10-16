@@ -75,13 +75,18 @@ function CreatureField() {
     const allAwake = awakeCount === creatures.length;
     const allAsleep = awakeCount === 0;
 
+    // Background color changes
+    let backgroundColor = '#f0f0f0'; // default color
+    if (allAwake) backgroundColor = '#ffd700'; // when all awake
+    else if (allAsleep) backgroundColor = '#1a1a2e'; // when all asleep
+
     const fieldStyle = {
         position: 'relative',
         width: '800px',
         height: '800px',
         border: '2px solid #ccc',
         margin: '20px auto',
-        backgroundColor: '#6b8c66'
+        backgroundColor: backgroundColor
     };
 
     return (
